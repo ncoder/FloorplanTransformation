@@ -24,7 +24,8 @@ class Viewer(ShowBase):
     lens.setNear(0.01)
     lens.setFar(100000)
     base.cam.node().setLens(lens)
-    floorplan = Floorplan('test/floorplan_7')
+    #floorplan = Floorplan('data/floorplan_representation/00/02/09a30b61b563f93faf6a6466ffab/0001')
+    floorplan = Floorplan('data/floorplan_representation/04/ea/b04fc0d140bf259d16fc5dc0c6ab/0001')
     #floorplan.setFilename('test/floorplan_2')
     floorplan.read()
     self.scene = floorplan.generateEggModel()
@@ -56,7 +57,7 @@ class Viewer(ShowBase):
     dlnp.lookAt(0.5, 0.5, 2)
     self.render.setLight(dlnp)
     
-    for i in xrange(10):
+    for i in range(10):
       plight = PointLight('plight')
       plight.setAttenuation((1, 0, 1))
       color = random.randint(10, 15)
@@ -97,8 +98,8 @@ class Viewer(ShowBase):
     self.viewMode = 'T'
     self.viewChangingProgress = 1.02
 
-    ceiling = self.scene.find("**/ceiling")
-    ceiling.hide()
+    #ceiling = self.scene.find("**/ceiling")
+    #ceiling.hide()
     
     return
 
@@ -164,7 +165,7 @@ class Viewer(ShowBase):
   def changeView(self):
     self.cameraPos = []
     self.target = []
-    for c in xrange(3):
+    for c in range(3):
       self.cameraPos.append(self.prevCameraPos[c] + (self.newCameraPos[c] - self.prevCameraPos[c]) * self.viewChangingProgress)
       self.target.append(self.prevTarget[c] + (self.newTarget[c] - self.prevTarget[c]) * self.viewChangingProgress)
       continue
@@ -191,14 +192,14 @@ class Viewer(ShowBase):
       pass
     
     if base.mouseWatcherNode.is_button_down('w'):
-      for c in xrange(2):
+      for c in range(2):
         step = movementStep * (self.target[c] - self.cameraPos[c])
         self.cameraPos[c] += step
         self.target[c] += step
         continue
       pass
     if base.mouseWatcherNode.is_button_down('s'):
-      for c in xrange(2):
+      for c in range(2):
         step = movementStep * (self.target[c] - self.cameraPos[c])
         self.cameraPos[c] -= step
         self.target[c] -= step
